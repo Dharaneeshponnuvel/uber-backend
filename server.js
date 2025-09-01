@@ -16,14 +16,14 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "uber-frontend-gamma.vercel.app",
+    origin: "https://uber-frontend-gamma.vercel.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: "uber-frontend-gamma.vercel.app",
+  origin: "https://uber-frontend-gamma.vercel.app",
   credentials: true
 }));
 app.use(express.json());
