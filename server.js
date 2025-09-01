@@ -14,18 +14,28 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
+
+const allowedOrigins = [
+  "https://uber-frontend-gamma.vercel.app", // deployed frontend
+  "http://localhost:5173"                   // vite dev
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "https://uber-frontend-gamma.vercel.app",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true
   }
 });
 
 // Middleware
-app.use(cors({
-  origin: "https://uber-frontend-gamma.vercel.app",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true
+  })
+);
+
 app.use(express.json());
 
 // Initialize Socket.IO
